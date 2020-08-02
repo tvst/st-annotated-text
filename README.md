@@ -53,3 +53,10 @@ The `annotated_text()` function accepts any of the following arguments:
 - [htbuilder.HtmlElement](https://github.com/tvst/htbuilder) objects in case you want to customize
   the annotations further. In particular, you can import the `annotation()` function from this
   module to easily produce annotations whose CSS you can customize via keyword arguments.
+
+
+## To-do
+
+Just one to-do:
+
+- [ ] Write tests! Contributions accepted :wink:
