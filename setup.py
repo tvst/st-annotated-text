@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="st-annotated-text",
-    version="1.0.0",
+    version="1.0.1",
     author="Thiago Teixeira",
     author_email="me@thiagot.com",
     description="A simple component to display annotated text in Streamlit apps.",
@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/tvst/st-annotated-text",
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
-    install_requires=["iteration_utilities"],
+    install_requires=["htbuilder"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",

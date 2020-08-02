@@ -122,7 +122,7 @@ def annotated_text(*args):
             out(arg)
 
         elif isinstance(arg, tuple):
-            out(annot(*arg))
+            out(annotation(*arg))
 
         else:
             raise Exception("Oh noes!")

@@ -9,7 +9,7 @@ First install Streamlit (of course!) then pip-install this library:
 
 ```bash
 pip install streamlit
-pip install st_annotated_text
+pip install st-annotated-text
 ```
 
 
