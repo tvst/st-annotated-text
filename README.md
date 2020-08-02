@@ -1,6 +1,8 @@
 # Annotated Text component for Streamlit
 
-A simple component to display annotated text in Streamlit apps.
+A simple component to display annotated text in Streamlit apps. For example:
+
+![Example image](https://github.com/tvst/st-annotated-text/raw/master/example.png)
 
 
 ## Installation
@@ -13,7 +15,7 @@ pip install st-annotated-text
 ```
 
 
-## Examples
+## Example
 
 ```python
 import streamlit as st
