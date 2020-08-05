@@ -1,4 +1,4 @@
-# Annotated Text component for Streamlit
+# Annotated Text Component for Streamlit
 
 A simple component to display annotated text in Streamlit apps. For example:
 
