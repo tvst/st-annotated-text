@@ -1,4 +1,4 @@
-import streamlit.components.v1
+import streamlit as st
 
 from htbuilder import HtmlElement, div, span, styles
 from htbuilder.units import px, rem, em
@@ -127,4 +127,4 @@ def annotated_text(*args):
         else:
             raise Exception("Oh noes!")
 
-    streamlit.components.v1.html(str(out))
+    st.write(str(out), unsafe_allow_html=True)
