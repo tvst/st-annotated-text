@@ -1,12 +1,11 @@
 import streamlit as st
 
-from htbuilder import H, HtmlElement
+from htbuilder import H, HtmlElement, styles
 from htbuilder.units import unit
 
-# Only works in 3.7+: from htbuilder import HtmlElement, div, span, styles
+# Only works in 3.7+: from htbuilder import div, span
 div = H.div
 span = H.span
-styles = H.styles
 
 # Only works in 3.7+: from htbuilder.units import px, rem, em
 px = unit.px
