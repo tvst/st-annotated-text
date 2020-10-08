@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit.components.v1
 
 from htbuilder import H, HtmlElement, styles
 from htbuilder.units import unit
@@ -79,7 +79,7 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
     )
 
 
-def annotated_text(*args):
+def annotated_text(*args, **st_html_kwargs):
     """Writes test with annotations into your Streamlit app.
 
     Parameters
@@ -136,4 +136,4 @@ def annotated_text(*args):
         else:
             raise Exception("Oh noes!")
 
-    st.write(str(out), unsafe_allow_html=True)
+    streamlit.components.v1.html(str(out), **st_html_kwargs)
