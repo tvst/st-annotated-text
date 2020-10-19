@@ -117,7 +117,6 @@ def annotated_text(*args):
     scrolling = False
 
     for arg in args:
-        # st.write(type(arg))
         if isinstance(arg, str):
             out(arg)
 
