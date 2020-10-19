@@ -1,5 +1,4 @@
 import streamlit.components.v1
-
 from htbuilder import HtmlElement, div, span, styles
 from htbuilder.units import px, rem, em
 
@@ -114,7 +113,11 @@ def annotated_text(*args):
         font_size=px(16),
     ))
 
+    height = None
+    scrolling = False
+
     for arg in args:
+        # st.write(type(arg))
         if isinstance(arg, str):
             out(arg)
 
@@ -124,7 +127,13 @@ def annotated_text(*args):
         elif isinstance(arg, tuple):
             out(annotation(*arg))
 
+        elif type(arg) == bool:
+            scrolling = arg
+
+        elif isinstance(arg, int):
+            height = arg
+
         else:
             raise Exception("Oh noes!")
 
-    streamlit.components.v1.html(str(out))
+    streamlit.components.v1.html(str(out), height=height, scrolling=scrolling)
