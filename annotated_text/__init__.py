@@ -70,7 +70,7 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
     )
 
 
-def annotated_text(*args):
+def annotated_text(*args, **kwargs):
     """Writes test with annotations into your Streamlit app.
 
     Parameters
@@ -127,4 +127,4 @@ def annotated_text(*args):
         else:
             raise Exception("Oh noes!")
 
-    streamlit.components.v1.html(str(out))
+    streamlit.components.v1.html(str(out), **kwargs)
