@@ -19,7 +19,7 @@ pip install st-annotated-text
 
 ```python
 import streamlit as st
-from st_annotated_text import annotated_text
+from annotated_text import annotated_text
 
 """
 # Annotated text example
