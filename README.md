@@ -45,7 +45,7 @@ annotated_text(
 
 ## Parameters
 
-The `annotated_text()` function accepts any of the following arguments:
+The `annotated_text()` function accepts any number of the following arguments:
 - strings, to draw the string as-is on the screen.
 - tuples of the form (main_text, annotation_text, background, color) where
   background and foreground colors are optional and should be an CSS-valid string such as
