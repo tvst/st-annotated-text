@@ -1,4 +1,5 @@
-import streamlit.components.v1
+import streamlit as st
+import html
 
 from htbuilder import H, HtmlElement, styles
 from htbuilder.units import unit
@@ -50,22 +51,19 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
 
     """
 
-    if "font_family" not in style:
-        style["font_family"] = "sans-serif"
-
     return span(
         style=styles(
             background=background,
             border_radius=rem(0.33),
             color=color,
-            padding=(rem(0.17), rem(0.67)),
+            padding=(0, rem(0.67)),
             display="inline-flex",
             justify_content="center",
             align_items="center",
             **style,
         )
     )(
-        body,
+        html.escape(body),
         span(
             style=styles(
                 color=color,
@@ -73,13 +71,15 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
                 opacity=0.5,
                 padding_left=rem(0.5),
                 text_transform="uppercase",
-                margin_bottom=px(-2),
+                display="flex",
+                align_items="center",
+                justify_content="center",
             )
-        )(label)
+        )(html.escape(label))
     )
 
 
-def annotated_text(*args, **st_html_kwargs):
+def annotated_text(*args):
     """Writes test with annotations into your Streamlit app.
 
     Parameters
@@ -117,15 +117,11 @@ def annotated_text(*args, **st_html_kwargs):
     ... )
 
     """
-    out = div(style=styles(
-        font_family="sans-serif",
-        line_height="1.5",
-        font_size=px(16),
-    ))
+    out = div()
 
     for arg in args:
         if isinstance(arg, str):
-            out(arg)
+            out(html.escape(arg))
 
         elif isinstance(arg, HtmlElement):
             out(arg)
@@ -136,4 +132,4 @@ def annotated_text(*args, **st_html_kwargs):
         else:
             raise Exception("Oh noes!")
 
-    streamlit.components.v1.html(str(out), **st_html_kwargs)
+    st.markdown(str(out), unsafe_allow_html=True)
