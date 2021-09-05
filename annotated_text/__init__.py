@@ -119,6 +119,7 @@ def annotated_text(*args):
     """
     out = div()
 
+
     for arg in args:
         if isinstance(arg, str):
             out(html.escape(arg))
@@ -128,6 +129,18 @@ def annotated_text(*args):
 
         elif isinstance(arg, tuple):
             out(annotation(*arg))
+
+        elif isinstance(arg,list):
+            for el in arg:
+                if isinstance(el, str):
+                    out(html.escape(el))
+
+                elif isinstance(el, HtmlElement):
+                    out(el)
+
+                elif isinstance(el, tuple):
+                    out(annotation(*el))
+
 
         else:
             raise Exception("Oh noes!")
