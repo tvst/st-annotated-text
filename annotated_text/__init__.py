@@ -79,7 +79,7 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
     )
 
 
-def annotated_text(*args):
+def annotated_text(*args, target=st):
     """Writes test with annotations into your Streamlit app.
 
     Parameters
@@ -132,4 +132,4 @@ def annotated_text(*args):
         else:
             raise Exception("Oh noes!")
 
-    st.markdown(str(out), unsafe_allow_html=True)
+    target.markdown(str(out), unsafe_allow_html=True)
