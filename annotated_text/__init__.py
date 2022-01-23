@@ -31,8 +31,9 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
         The color to use for the background "chip" containing this annotation.
     color : string
         The color to use for the body and label text.
-    **style : dict
-        Any CSS you want to use to customize the containing "chip".
+    style : dict
+        Any CSS you want to apply to the containing "chip". This is useful for things like
+
 
     Examples
     --------
@@ -51,36 +52,72 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
 
     """
 
-    return span(
-        style=styles(
-            background=background,
-            border_radius=rem(0.33),
-            color=color,
-            padding=(0, rem(0.67)),
-            display="inline-flex",
-            justify_content="center",
-            align_items="center",
-            **style,
-        )
-    )(
-        html.escape(body),
+    return (
         span(
             style=styles(
-                color=color,
-                font_size=em(0.67),
-                opacity=0.5,
-                padding_left=rem(0.5),
-                text_transform="uppercase",
-                display="flex",
-                align_items="center",
-                justify_content="center",
-            )
-        )(html.escape(label))
+                background=background,
+                border_radius=rem(0.33),
+                padding=(rem(0.125), rem(0.5)),
+                overflow="hidden",
+                **style,
+            ))(
+
+            span(style=styles(color=color))(
+                html.escape(body),
+            ),
+
+            span(
+                style=styles(
+                    padding_left=rem(0.5),
+                    text_transform="uppercase",
+                ))(
+                span(
+                    style=styles(
+                        font_size=em(0.67),
+                        opacity=0.5,
+                        color=color,
+                    ))(
+                    html.escape(label),
+                ),
+            ),
+        )
     )
 
 
+def get_annotated_html(*args):
+    """Writes text with annotations into an HTML string.
+
+    Parameters
+    ----------
+    *args : see annotated_text()
+
+    Returns
+    -------
+    str
+        An HTML string.
+    """
+
+
+    out = div()
+
+    for arg in args:
+        if isinstance(arg, str):
+            out(html.escape(arg))
+
+        elif isinstance(arg, HtmlElement):
+            out(arg)
+
+        elif isinstance(arg, tuple):
+            out(annotation(*arg))
+
+        else:
+            raise Exception("Oh noes!")
+
+    return str(out)
+
+
 def annotated_text(*args):
-    """Writes test with annotations into your Streamlit app.
+    """Writes text with annotations into your Streamlit app.
 
     Parameters
     ----------
@@ -117,19 +154,10 @@ def annotated_text(*args):
     ... )
 
     """
-    out = div()
+    st.markdown(
+        get_annotated_html(*args),
+        unsafe_allow_html=True,
+    )
 
-    for arg in args:
-        if isinstance(arg, str):
-            out(html.escape(arg))
 
-        elif isinstance(arg, HtmlElement):
-            out(arg)
-
-        elif isinstance(arg, tuple):
-            out(annotation(*arg))
-
-        else:
-            raise Exception("Oh noes!")
-
-    st.markdown(str(out), unsafe_allow_html=True)
+get_annotated_html.__doc__ = annotated_text.__doc__
