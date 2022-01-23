@@ -12,8 +12,25 @@ px = unit.px
 rem = unit.rem
 em = unit.em
 
+# Colors from the Streamlit palette.
+# These are red-70, orange-70, ..., violet-70, gray-70.
+PALETTE = [
+    "#ff4b4b",
+    "#ffa421",
+    "#ffe312",
+    "#21c354",
+    "#00d4b1",
+    "#00c0f2",
+    "#1c83e1",
+    "#803df5",
+    "#808495",
+]
 
-def annotation(body, label="", background="#ddd", color="#333", **style):
+OPACITIES = [
+    "33", "66",
+]
+
+def annotation(body, label="", background=None, color=None, **style):
     """Build an HtmlElement span object with the given body and annotation label.
 
     The end result will look something like this:
@@ -26,10 +43,12 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
         The string to put in the "body" part of the annotation.
     label : string
         The string to put in the "label" part of the annotation.
-    background : string
+    background : string or None
         The color to use for the background "chip" containing this annotation.
-    color : string
+        If None, will use a random color based on the label.
+    color : string or None
         The color to use for the body and label text.
+        If None, will use the document's default text color.
     style : dict
         Any CSS you want to apply to the containing "chip". This is useful for things like
 
@@ -51,6 +70,17 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
 
     """
 
+    color_style = {}
+
+    if color:
+        color_style['color'] = color
+
+    if not background:
+        label_sum = sum(ord(c) for c in label)
+        background_color = PALETTE[label_sum % len(PALETTE)]
+        background_opacity = OPACITIES[label_sum % len(OPACITIES)]
+        background = background_color + background_opacity
+
     return (
         span(
             style=styles(
@@ -58,12 +88,11 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
                 border_radius=rem(0.33),
                 padding=(rem(0.125), rem(0.5)),
                 overflow="hidden",
+                **color_style,
                 **style,
             ))(
 
-            span(style=styles(color=color))(
-                html.escape(body),
-            ),
+            html.escape(body),
 
             span(
                 style=styles(
@@ -74,7 +103,6 @@ def annotation(body, label="", background="#ddd", color="#333", **style):
                     style=styles(
                         font_size=em(0.67),
                         opacity=0.5,
-                        color=color,
                     ))(
                     html.escape(label),
                 ),
@@ -95,7 +123,6 @@ def get_annotated_html(*args):
     str
         An HTML string.
     """
-
 
     out = div()
 
