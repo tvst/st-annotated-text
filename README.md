@@ -21,12 +21,25 @@ pip install st-annotated-text
 import streamlit as st
 from annotated_text import annotated_text
 
-"""
-# Annotated text example
+annotated_text(
+    "This ",
+    ("is", "verb"),
+    " some ",
+    ("annotated", "adj"),
+    ("text", "noun"),
+    " for those of ",
+    ("you", "pronoun"),
+    " who ",
+    ("like", "verb"),
+    " this sort of ",
+    ("thing", "noun"),
+    "."
+)
+```
 
-Below is an example of how to use the annotated_text function:
-"""
+And you can customize colors:
 
+```python
 annotated_text(
     "This ",
     ("is", "verb", "#8ef"),
@@ -39,6 +52,7 @@ annotated_text(
     ("like", "verb", "#8ef"),
     " this sort of ",
     ("thing", "noun", "#afa"),
+    "."
 )
 ```
 
@@ -53,10 +67,3 @@ The `annotated_text()` function accepts any number of the following arguments:
 - [htbuilder.HtmlElement](https://github.com/tvst/htbuilder) objects in case you want to customize
   the annotations further. In particular, you can import the `annotation()` function from this
   module to easily produce annotations whose CSS you can customize via keyword arguments.
-
-
-## To-do
-
-Just one to-do:
-
-- [ ] Write tests! Contributions accepted :wink:
