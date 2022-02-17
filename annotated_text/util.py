@@ -81,20 +81,19 @@ def annotation(body, label="", background=None, color=None, **style):
         background_opacity = OPACITIES[label_sum % len(OPACITIES)]
         background = background_color + background_opacity
 
-    return (
-        span(
-            style=styles(
-                background=background,
-                border_radius=rem(0.33),
-                padding=(rem(0.125), rem(0.5)),
-                overflow="hidden",
-                **color_style,
-                **style,
-            ))(
+    anno = [span(
+                style=styles(
+                    background=background,
+                    border_radius=rem(0.33),
+                    padding=(rem(0.125), rem(0.5)),
+                    overflow="hidden",
+                    **color_style,
+                    **style,
+                    )
+            )(html.escape(body))]
 
-            html.escape(body),
-
-            span(
+    if label != "":
+        anno.append(span(
                 style=styles(
                     padding_left=rem(0.5),
                     text_transform="uppercase",
@@ -106,9 +105,9 @@ def annotation(body, label="", background=None, color=None, **style):
                     ))(
                     html.escape(label),
                 ),
-            ),
-        )
-    )
+            ))
+
+    return tuple(anno)
 
 
 def get_annotated_html(*args):
