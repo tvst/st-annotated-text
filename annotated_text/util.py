@@ -71,6 +71,12 @@ def annotation(body, label="", background=None, color=None, **style):
     """
 
     color_style = {}
+    
+    default_style = dict(
+        border_radius=rem(0.33),
+        padding=(rem(0.125), rem(0.5)),
+        overflow="hidden",
+    )
 
     if color:
         color_style['color'] = color
@@ -80,14 +86,14 @@ def annotation(body, label="", background=None, color=None, **style):
         background_color = PALETTE[label_sum % len(PALETTE)]
         background_opacity = OPACITIES[label_sum % len(OPACITIES)]
         background = background_color + background_opacity
-
+    
+    for elem, styling in default_style.items():
+        style[elem] = style.get(elem, styling)
+        
     return (
         span(
             style=styles(
                 background=background,
-                border_radius=rem(0.33),
-                padding=(rem(0.125), rem(0.5)),
-                overflow="hidden",
                 **color_style,
                 **style,
             ))(
