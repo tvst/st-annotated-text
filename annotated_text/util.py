@@ -136,7 +136,21 @@ def get_annotated_html(*args):
         elif isinstance(arg, tuple):
             out(annotation(*arg))
 
+        elif isinstance(arg,list):
+            for el in arg:
+                if isinstance(el, str):
+                    out(html.escape(el))
+
+                elif isinstance(el, HtmlElement):
+                    out(el)
+
+                elif isinstance(el, tuple):
+                    out(annotation(*el))
+
+
         else:
             raise Exception("Oh noes!")
 
     return str(out)
+
+
