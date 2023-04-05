@@ -125,7 +125,23 @@ def get_annotated_html(*args):
         An HTML string.
     """
 
-    out = div()
+    return str(get_annotated_element(*args))
+
+
+def get_annotated_element(*args):
+    """Writes text with annotations into an HTBuilder HtmlElement object.
+
+    Parameters
+    ----------
+    *args : see annotated_text()
+
+    Returns
+    -------
+    HtmlElement
+        An HTBuilder HtmlElement object.
+    """
+
+    out = span()
 
     for arg in args:
         if isinstance(arg, str):
@@ -137,7 +153,10 @@ def get_annotated_html(*args):
         elif isinstance(arg, tuple):
             out(annotation(*arg))
 
+        elif isinstance(arg, list):
+            out(get_annotated_element(*arg))
+
         else:
             raise Exception("Oh noes!")
 
-    return str(out)
+    return out

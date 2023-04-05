@@ -17,6 +17,7 @@ def annotated_text(*args):
         - HtmlElement objects in case you want to customize the annotations further. In particular,
           you can import the `annotation()` function from this module to easily produce annotations
           whose CSS you can customize via keyword arguments.
+        - lists of any of the above -- or of lists!
 
     Examples
     --------
