@@ -7,14 +7,14 @@ help:
 .PHONY: develop
 # Set up development environment
 develop:
-	pipenv install --dev
-	pipenv run python setup.py develop
-	pipenv shell
+	pip install -r dev-requirements.txt -r requirements.txt
+	python setup.py develop
 
 .PHONY: install
 # Install in your current Python environment
 install:
-	pipenv run python setup.py install
+	pip install -r requirements.txt
+	python setup.py install
 
 .PHONY: test
 # Run unit tests
