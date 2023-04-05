@@ -6,6 +6,16 @@ from annotated_text import annotated_text
 """
 # Annotated Text
 
+This app shows off the [Annotated Text component](https://github.com/tvst/st-annotated-text) for
+Streamlit.
+
+If you want to try this at home, you'll first need to install it:
+
+```python
+pip install st-annotated-text
+```
+
+
 ## Basic example
 """
 
