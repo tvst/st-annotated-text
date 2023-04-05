@@ -4,6 +4,10 @@ A simple component to display annotated text in Streamlit apps. For example:
 
 ![Example image](https://github.com/tvst/st-annotated-text/raw/master/example.png)
 
+Or, even better, check out our demo app here:
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-annotated-text.streamlit.app/)
+
 
 ## Installation
 
