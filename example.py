@@ -1,53 +1,106 @@
 import streamlit as st
-from annotated_text import annotated_text, annotation
+from annotated_text import annotated_text
+
 
 
 """
-# Annotated text example
+# Annotated Text
 
-Below is some annotated text:
+## Basic example
 """
 
 with st.echo():
+    from annotated_text import annotated_text
+
     annotated_text(
         "This ",
-        ("is", "verb"),
+        ("is", "Verb"),
         " some ",
-        ("annotated", "adj"),
-        ("text", "noun"),
+        ("annotated", "Adj"),
+        ("text", "Noun"),
         " for those of ",
-        ("you", "pronoun"),
+        ("you", "Pronoun"),
         " who ",
-        ("like", "verb"),
+        ("like", "Verb"),
         " this sort of ",
-        ("thing", "noun"),
-        "."
+        ("thing", "Noun"),
+        ". ",
+        "And here's a ",
+        ("word", ""),
+        " with a fancy background but no label.",
     )
 
-# Weird, right now there's negative margin at the bottom of all st.markdown.
-# Adding this to make up for it, but we should fix it in Streamlit itself.
 ""
 
 """
-Bam!
+## Nested arguments
+
+You can also pass lists (and lists within lists!) as an argument:
+"""
+
+
+with st.echo():
+    my_list = [
+        "Hello ",
+        [
+            "my ",
+            ("dear", "Adj"),
+            " ",
+        ],
+        ("world", "Noun"),
+        ".",
+    ]
+
+    annotated_text(my_list)
+
+
+""
+""
+
+"""
+## Customization
 """
 
 """
-And you can also customize colors:
+### Custom colors
 """
 
 with st.echo():
     annotated_text(
         "This ",
-        ("is", "verb", "#8ef"),
+        ("is", "Verb", "#8ef"),
         " some ",
-        ("annotated", "adj", "#faa"),
-        ("text", "noun", "#afa"),
+        ("annotated", "Adj", "#faa"),
+        ("text", "Noun", "#afa"),
         " for those of ",
-        ("you", "pronoun", "#fea"),
+        ("you", "Pronoun", "#fea"),
         " who ",
-        ("like", "verb", "#8ef"),
+        ("like", "Verb", "#8ef"),
         " this sort of ",
-        ("thing", "noun", "#afa"),
-        "."
+        ("thing", "Noun", "#afa"),
+        ". "
+        "And here's a ",
+        ("word", "", "#faf"),
+        " with a fancy background but no label.",
     )
+
+""
+""
+
+"""
+### Custom styles
+
+You can customize a bunch of different styles by overriding the variables
+set in the `annotated_text.parameters` module. For example:
+
+```python
+from annotated_text import annotated_text, parameters
+
+parameters.SHOW_LABEL_SEPARATOR = False
+parameters.BORDER_RADIUS = 0
+parameters.PADDING = "0 0.25rem"
+```
+
+For more configurable parameters, see the
+[parameters.py source file](https://github.com/tvst/st-annotated-text/blob/master/annotated_text/parameters.py).
+"""
