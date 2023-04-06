@@ -41,24 +41,8 @@ annotated_text(
 )
 ```
 
-And you can customize colors:
-
-```python
-annotated_text(
-    "This ",
-    ("is", "verb", "#8ef"),
-    " some ",
-    ("annotated", "adj", "#faa"),
-    ("text", "noun", "#afa"),
-    " for those of ",
-    ("you", "pronoun", "#fea"),
-    " who ",
-    ("like", "verb", "#8ef"),
-    " this sort of ",
-    ("thing", "noun", "#afa"),
-    "."
-)
-```
+For more examples, including :sparkles:**customization options**:sparkles:, see
+[the demo app](https://st-annotated-text.streamlit.app).
 
 
 ## Parameters
@@ -71,3 +55,4 @@ The `annotated_text()` function accepts any number of the following arguments:
 - [htbuilder.HtmlElement](https://github.com/tvst/htbuilder) objects in case you want to customize
   the annotations further. In particular, you can import the `annotation()` function from this
   module to easily produce annotations whose CSS you can customize via keyword arguments.
+- lists of any of the above -- or of lists!
