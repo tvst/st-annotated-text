@@ -126,13 +126,12 @@ For more configurable parameters, see the
 ### Even more customization
 
 If you want to go beyond the customizations above, you can bring your own CSS!
-  
-```python
-from annotated_text import annotated_text, annotation
-
-annotated_text(
-  "Hello ",
-  annotation("world!", "noun", font_family="Comic Sans MS", border="2px dashed red"),
-)
-```
 """
+  
+with st.echo():
+    from annotated_text import annotated_text, annotation
+
+    annotated_text(
+      "Hello ",
+      annotation("world!", "noun", font_family="Comic Sans MS", border="2px dashed red"),
+    )
