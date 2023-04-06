@@ -17,6 +17,8 @@ pip install st-annotated-text
 
 
 ## Basic example
+
+Annotations are just tuples:
 """
 
 with st.echo():
@@ -73,6 +75,8 @@ with st.echo():
 
 """
 ### Custom colors
+
+If the annotation tuple has more than 2 items, the 3rd will be used as the background color and the 4th as the foreground color:
 """
 
 with st.echo():
@@ -114,3 +118,20 @@ parameters.PADDING = "0 0.25rem"
 For more configurable parameters, see the
 [parameters.py source file](https://github.com/tvst/st-annotated-text/blob/master/annotated_text/parameters.py).
 """
+
+""
+""
+
+"""
+### Even more customization
+
+If you want to go beyond the customizations above, you can bring your own CSS!
+  
+```python
+from annotated_text import annotated_text, annotation
+
+annotated_text(
+  "Hello ",
+  annotation("world!", "noun", font_family="Comic Sans MS", border="2px dashed red"),
+)
+```
