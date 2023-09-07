@@ -1,11 +1,11 @@
 import setuptools
 
-with open("README.md", "r", encoding='utf8') as fh:
+with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="st-annotated-text",
-    version="4.0.0",
+    version="4.0.1",
     author="Thiago Teixeira",
     author_email="me@thiagot.com",
     description="A simple component to display annotated text in Streamlit apps.",
@@ -20,5 +20,5 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.5',
+    python_requires=">=3.5",
 )
