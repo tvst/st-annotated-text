@@ -3,7 +3,7 @@ from . import util
 
 annotation = util.annotation
 
-def annotated_text(*args):
+def annotated_text(*args, newline_mode="old"):
     """Writes text with annotations into your Streamlit app.
 
     Parameters
@@ -43,6 +43,6 @@ def annotated_text(*args):
 
     """
     st.markdown(
-        util.get_annotated_html(*args),
+        util.get_annotated_html(*args, newline_mode=newline_mode),
         unsafe_allow_html=True,
     )
