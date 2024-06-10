@@ -3,6 +3,8 @@ import html
 from htbuilder import H, HtmlElement, styles
 from htbuilder.units import unit
 
+from .handler import map_strategy
+
 # This works in 3.7+:
 # from htbuilder import span
 #
@@ -11,7 +13,7 @@ span = H.span
 
 import annotated_text.parameters as p
 
-def annotation(body, label="", background=None, color=None, **style):
+def annotation(body, label="", background=None, color=None, newline_mode="old", **style):
     """Build an HtmlElement span object with the given body and annotation label.
 
     The end result will look something like this:
@@ -30,6 +32,11 @@ def annotation(body, label="", background=None, color=None, **style):
     color : string or None
         The color to use for the body and label text.
         If None, will use the document's default text color.
+    newline_mode : string
+        The string that selects display of newlines.
+          - 'old' (default) - ignores first consequential \n, background break on second is possible
+          - 'flex' - Writes all newlines. Background fixed for both label and content. Each annotation is grouped in a box having the same label on the side (display inline-flex preserved)
+          - 'multiline' - Writes all newlines with proper background for content. Lines are preserved (inline-blocks instead of inline-flex).
     style : dict
         Any CSS you want to apply to the containing "chip". This is useful for things like
 
@@ -49,6 +56,10 @@ def annotation(body, label="", background=None, color=None, **style):
 
     >>> annotation("apple", "fruit", background="#FF0", border="1px dashed red")
 
+    Produce an annotation preserving newlines 
+    
+    >>> annotation("This is a \n \n test.", "test", newline_mode="multiline")
+    
     """
 
     color_style = {}
@@ -92,27 +103,9 @@ def annotation(body, label="", background=None, color=None, **style):
             )
         )
 
-    return (
-        span(
-            style=styles(
-                display="inline-flex",
-                flex_direction="row",
-                align_items="center",
-                background=background,
-                border_radius=p.BORDER_RADIUS,
-                padding=p.PADDING,
-                overflow="hidden",
-                line_height=1,
-                **color_style,
-                **style,)
-        )(
-            html.escape(body),
-            label_element,
-        )
-    )
+    return map_strategy(body, newline_mode, background, color_style, style, label_element)
 
-
-def get_annotated_html(*args):
+def get_annotated_html(*args, newline_mode="old"):
     """Writes text with annotations into an HTML string.
 
     Parameters
@@ -125,10 +118,10 @@ def get_annotated_html(*args):
         An HTML string.
     """
 
-    return str(get_annotated_element(*args))
+    return str(get_annotated_element(*args, newline_mode=newline_mode))
 
 
-def get_annotated_element(*args):
+def get_annotated_element(*args, newline_mode="old"):
     """Writes text with annotations into an HTBuilder HtmlElement object.
 
     Parameters
@@ -151,10 +144,10 @@ def get_annotated_element(*args):
             out(arg)
 
         elif isinstance(arg, tuple):
-            out(annotation(*arg))
+            out(annotation(*arg, newline_mode=newline_mode))
 
         elif isinstance(arg, list):
-            out(get_annotated_element(*arg))
+            out(get_annotated_element(*arg, newline_mode=newline_mode))
 
         else:
             raise Exception("Oh noes!")
