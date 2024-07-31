@@ -4,7 +4,7 @@ from annotated_text import annotated_text
 st.set_page_config(page_title="Annotated Text", page_icon="📝")
 
 """
-# Annotated Text
+# 📝 Annotated Text
 
 This app shows off the [Annotated Text component](https://github.com/tvst/st-annotated-text) for
 Streamlit.
