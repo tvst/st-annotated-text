@@ -7,7 +7,10 @@ from htbuilder.units import unit
 # from htbuilder import span
 #
 # ...so we use the 3.7 version of the code above here:
-span = H.span
+try:
+    span = H.span
+except AttributeError:
+    from htbuilder import span
 
 import annotated_text.parameters as p
 
