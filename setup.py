@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf8") as fh:
 
 setuptools.setup(
     name="st-annotated-text",
-    version="4.0.1",
+    version="4.0.2",
     author="Thiago Teixeira",
     author_email="me@thiagot.com",
     description="A simple component to display annotated text in Streamlit apps.",
